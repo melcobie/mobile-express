@@ -68,10 +68,6 @@ async function getUsersByData(data){
     }
 }
 
-async function getUsersByType(type){
-    return getUsersByData({type});
-}
-
 async function newUser(data){
     let user = new users(data);
     try{
@@ -86,7 +82,6 @@ module.exports = {
     getUser,
     getUserByUsername,
     getUserByToken,
-    getUsersByType,
     newUser,
     getUsersByData,
 }

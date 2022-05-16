@@ -4,7 +4,6 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 const Token = require("../models/tokens");
-const { type } = require("../util/constant");
 const { getUserByUsername } = require("../service/user-service");
 
 router.post("/signin", async (req, res)=>{ 
@@ -24,7 +23,7 @@ router.post("/signin", async (req, res)=>{
 })
 
 router.post("/signup", getUserByUsername,async(req, res)=>{
-    req.body = {...req.body, type: type.ROLE_CLIENT};
+    req.body = {...req.body};
     let user = new User(req.body);
     try{
         const newUser = await user.save();
