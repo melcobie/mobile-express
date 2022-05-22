@@ -9,7 +9,7 @@ const { getUserByUsername } = require("../service/user-service");
 router.post("/signin", async (req, res)=>{ 
     try{
         const users = await User.findOne({
-            email : req.body.username,
+            username : req.body.username,
             password : req.body.password,
         });
         if(users == null){
