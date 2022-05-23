@@ -8,6 +8,7 @@ const items=mongoose.Schema({
     name:String,
     description:String,
     genre:String,
+    urlVideo:String,
     details:  {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Details"
