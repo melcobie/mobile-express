@@ -85,6 +85,8 @@ exports.createScore= (req,res) =>{
     username : req.user.username,
     score: req.body.score
   }  
+  console.log(params);
+  console.log(req.body);
   CreateScores(params)
     .then((resultat) => {
       return res.status(201).json(resultat);
