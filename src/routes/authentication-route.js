@@ -39,7 +39,7 @@ router.delete("/logout", async(req, res)=>{
     const token = authToken && authToken.split(" ")[1];
     try{
         await Token.deleteMany({token});
-        res.sendStatus(204);
+        res.status(204).send("Logged out");
     }catch(err){
         res.status(500).json({ message : err.message });
     }
