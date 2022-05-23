@@ -79,27 +79,23 @@ exports.createItems= (req,res) =>{
    });
 };
 
-exports.createScore= (req,res) =>{
+exports.createScore= async (req,res) =>{
 
   let params = {
     username : req.user.username,
     score: req.body.score
   }  
-  CreateScores(params)
-    .then(async (resultat)=>{
-      if(!resultat){
-        let newScore = new Score({
-          score: score.score,
-          username: score.username
-        })
-        let score = await newScore.save();
-        return res.status(201).json(score);
-      }
-      return res.status(201).json(resultat);
+  let response = await CreateScores(params);
+  let resultat = response;
+  if(!resultat){
+    let newScore = new Score({
+      score: req.body.score,
+      username: req.body.username
     })
-  .catch((error) => {
-      return res.status(400).json({message: error})
-  });
+    let score = await newScore.save();
+    return res.status(201).json(score);
+  }
+  return res.status(201).json(resultat);
 };
 
 async function CreateCategorie(Params){
