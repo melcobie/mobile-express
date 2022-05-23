@@ -106,9 +106,9 @@ async function CreateCategorie(Params){
 };
 
 async function CreateScores(score){
-    return Score.findOneAndReplace(
+    return Score.findOneAndUpdate(
       { username: score.username },
-      score,
+      { $set: { score: score.score }},
       { new: true }
     )
 };
