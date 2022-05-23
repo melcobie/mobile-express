@@ -81,7 +81,7 @@ exports.createItems= (req,res) =>{
 
 exports.createScore= (req,res) =>{
 
-    CreateScores(req.user,req.body)
+    CreateScores(req.body)
     .then((resultat) => {
       return res.status(201).json(resultat);
   })
@@ -99,13 +99,16 @@ async function CreateCategorie(Params){
     return categorie;
 };
 
-async function CreateScores(Params,params1){
-  const score = new Score({
-    score: params1.score,
-    Username: Params.username,
-    });
-    score.save()
-    return score;
+async function CreateScores(params){
+  const score = {
+    score: params.score,
+    username: params.username,
+    };
+    return Score.findOneAndReplace(
+      { username: score.username },
+      score,
+      { new: true }
+    )
 };
 
 
