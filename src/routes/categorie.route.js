@@ -86,7 +86,7 @@ exports.createScore= (req,res) =>{
     score: req.body.score
   }  
   CreateScores(params)
-    .then((resultat)=>{
+    .then(async (resultat)=>{
       if(!resultat){
         let newScore = new Score({
           score: score.score,
