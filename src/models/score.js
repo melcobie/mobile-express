@@ -5,4 +5,4 @@ const score=mongoose.Schema({
     username:String
 });
 
-module.exports= mongoose.model('Score',score);
+module.exports= mongoose.model('score',score);

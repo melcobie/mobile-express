@@ -85,12 +85,18 @@ exports.createScore= (req,res) =>{
     username : req.user.username,
     score: req.body.score
   }  
-  console.log(params);
-  console.log(req.body);
   CreateScores(params)
-    .then((resultat) => {
+    .then((resultat)=>{
+      if(!resultat){
+        let newScore = new Score({
+          score: score.score,
+          username: score.username
+        })
+        let score = await newScore.save();
+        return res.status(201).json(score);
+      }
       return res.status(201).json(resultat);
-  })
+    })
   .catch((error) => {
       return res.status(400).json({message: error})
   });
@@ -106,10 +112,9 @@ async function CreateCategorie(Params){
 };
 
 async function CreateScores(score){
-    return Score.findOneAndUpdate(
+    return  Score.findOneAndUpdate(
       { username: score.username },
-      { $set: { score: score.score }},
-      { new: true }
+      { score: score.score }
     )
 };
 
