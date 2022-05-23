@@ -19,8 +19,14 @@ exports.createCateg= (req,res) =>{
 };
 
 exports.GetScore= (req,res) =>{
-  Score.find({nom:req.user.username})
+  Score.findOne({username:req.user.username})
   .then((resultat) => {
+      if(!resultat){
+        resultat = {
+          username: req.user.username,
+          score: 0
+        }
+      }
       return res.status(200).json(resultat);
   })
   .catch((error) => {
@@ -73,7 +79,7 @@ exports.createItems= (req,res) =>{
    });
 };
 
-exports.createScore= (req,res, next) =>{
+exports.createScore= (req,res) =>{
 
     CreateScores(req.user,req.body)
     .then((resultat) => {
