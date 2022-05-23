@@ -85,6 +85,7 @@ exports.createScore= async (req,res) =>{
     username : req.user.username,
     score: req.body.score
   }  
+  console.log(params);
   let response = await CreateScores(params);
   let resultat = response;
   if(!resultat){
