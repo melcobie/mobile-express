@@ -81,7 +81,7 @@ exports.createItems= (req,res) =>{
 
 exports.createScore= (req,res) =>{
 
-    CreateScores(req.body)
+    CreateScores(req.body.score)
     .then((resultat) => {
       return res.status(201).json(resultat);
   })
